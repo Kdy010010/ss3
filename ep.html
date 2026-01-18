@@ -1,87 +1,203 @@
-<!doctype html>
+<<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>StarShield2: Moonfront War — Epilogue</title>
-<style>
-  :root{--bg:#050014;--panel:rgba(10,14,40,.92);--panel2:rgba(8,12,34,.88);--text:#f4f8ff;--sub:#a6b0ff;--accent:#4af2c5;--danger:#ff4b81;}
-  *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at top,#16193b 0,var(--bg) 60%);color:var(--text)}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarShield2 — Epilogue</title>
 
-  /* Mobile: allow scrolling (short screens / safe areas) */
-  @media (max-width: 860px), (max-height: 740px){
-    body{display:block;overflow:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 28px;}
-    .wrap{min-height:auto;padding:0;}
-    .card{margin:0 auto;}
-  }
-  .wrap{width:min(980px,calc(100vw - 24px));padding:18px}
-  .card{background:linear-gradient(145deg, rgba(8,12,34,.96), rgba(6,8,24,.96));border:1px solid rgba(110,144,255,.55);border-radius:18px;box-shadow:0 0 28px rgba(0,0,0,.85), 0 0 18px rgba(74,242,197,.18);overflow:hidden}
-  header{padding:16px 16px 12px;border-bottom:1px solid rgba(110,144,255,.28)}
-  h1{font-size:20px;letter-spacing:.04em}
-  .sub{margin-top:6px;color:var(--sub);font-size:12px;line-height:1.4}
-  .body{padding:14px 16px 16px}
-  .scene{background:rgba(10,14,40,.55);border:1px solid rgba(80,110,255,.35);border-radius:14px;padding:12px 12px;line-height:1.65;font-size:13px;color:#eaf0ff;white-space:pre-wrap}
-  .meta{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
-  .tag{font-size:11px;color:var(--sub);border:1px solid rgba(180,196,255,.4);border-radius:999px;padding:4px 10px;background:rgba(12,18,50,.7)}
-  .tag b{color:var(--text)}
-  .actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
-  .btn{appearance:none;border:none;cursor:pointer;border-radius:12px;padding:10px 12px;font-weight:900;font-size:12px;letter-spacing:.02em;color:#001019;background:linear-gradient(180deg,var(--accent),#1bd8a6);box-shadow:0 0 0 1px rgba(74,242,197,.55), 0 0 18px rgba(74,242,197,.18)}
-  .btn.secondary{background:rgba(12,18,50,.9);color:var(--text);border:1px solid rgba(110,144,255,.45);box-shadow:none}
-  .btn.danger{background:linear-gradient(180deg,var(--danger),#ff2f63);color:#16000a}
-  footer{padding:10px 16px 14px;color:rgba(166,176,255,.85);font-size:11px;line-height:1.4;border-top:1px solid rgba(110,144,255,.22)}
+<style>
+:root{
+  --bg:#050014;
+  --text:#f4f8ff;
+  --sub:#a6b0ff;
+  --accent:#4af2c5;
+  --gold:#ffd166;
+  --panel:rgba(8,12,34,.92);
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+
+html,body{height:100%}
+body{
+  background: radial-gradient(circle at 18% 12%, #1b1f58 0%, #07001b 45%, #03000c 100%);
+  color:var(--text);
+  overflow:auto;   /* 모바일 스크롤 허용 */
+}
+
+/* background */
+#stars{position:fixed;inset:0;z-index:0}
+.vignette{
+  position:fixed;inset:-20%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle at 50% 30%, transparent 0 35%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.95) 100%);
+}
+.scan{
+  position:fixed;inset:0;pointer-events:none;z-index:2;
+  opacity:.08;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.15) 0 1px,transparent 1px 3px);
+}
+
+/* layout */
+.wrap{
+  position:relative;
+  z-index:3;
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px 16px 80px;
+}
+.card{
+  width:min(920px,100%);
+  background:linear-gradient(180deg,var(--panel),rgba(6,8,24,.95));
+  border-radius:22px;
+  border:1px solid rgba(166,176,255,.18);
+  box-shadow:0 20px 60px rgba(0,0,0,.55);
+  overflow:hidden;
+}
+
+/* header */
+.header{
+  padding:16px 20px;
+  background:rgba(10,14,40,.55);
+  border-bottom:1px solid rgba(166,176,255,.12);
+  font-size:13px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--sub);
+}
+
+/* content */
+.content{
+  padding:28px 24px 10px;
+  text-align:center;
+}
+.text{
+  font-size:1.6rem;
+  line-height:1.7;
+  letter-spacing:.04em;
+  min-height:4.5em;
+}
+
+/* image */
+.image-wrap{
+  margin-top:42px;
+  display:flex;
+  justify-content:center;
+  transform:translateY(-14px); /* ← 살짝 위로 띄움 */
+}
+.image-wrap img{
+  max-width:78%;
+  height:auto;
+  opacity:.92;
+  filter:contrast(1.05);
+}
+
+/* footer */
+.footer{
+  padding:18px;
+  border-top:1px solid rgba(166,176,255,.12);
+  background:rgba(10,14,40,.35);
+  display:flex;
+  justify-content:center;
+}
+button{
+  border-radius:14px;
+  padding:10px 16px;
+  font-weight:700;
+  background:rgba(10,14,40,.6);
+  color:var(--text);
+  border:1px solid rgba(74,242,197,.45);
+  cursor:pointer;
+}
+button:hover{background:rgba(10,14,40,.8)}
+
+/* fade */
+.fade{
+  position:fixed;inset:0;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .7s ease;
+  z-index:9;
+}
+.fade.on{opacity:1}
 </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <h1>EPILOGUE — Moonfront War</h1>
-        <div class="sub">달 앞면 전역(NEARSIDE) 확보 후, 전쟁은 다음 국면으로 진입했다.</div>
-      </header>
-      <div class="body">
-        <div class="scene">오세아누스 프로켈라룸(Oceanus Procellarum)에서 시작된 교두보는,
-마레 임브리움(Mare Imbrium)의 보급 레일을 끊어내며 전선을 굳혔다.
+<canvas id="stars"></canvas>
+<div class="vignette"></div>
+<div class="scan"></div>
+<div class="fade" id="fade"></div>
 
-코페르니쿠스(Copernicus) 고원에서 ‘광학 사격 통제’가 무너졌고,
-고요의 바다(마레 트랑퀼리타티스, Mare Tranquillitatis)에서는 유적 구역을 지켜낸 채 방어선을 세웠다.
+<div class="wrap">
+  <div class="card">
 
-세레니타티스(Mare Serenitatis)·플라토(Plato) 분화구 사슬전에서
-제4제국의 타워 증식 거점이 무력화되자, 달 앞면의 전쟁은 사실상 끝을 향해 기울었다.
+    <div class="header">EPILOGUE · LUNAR FRONT</div>
 
-마지막으로 티코(Tycho) 방사상 지형과 아리스타르코스(Aristarchus) 고원.
-‘앞면 완전 점령’을 선언했던 제4제국의 중앙 코어는 붕괴했고,
-지구-달 보급로는 다시 열렸다.
+    <div class="content">
+      <div class="text" id="tw"></div>
 
-그러나 승리의 보고서에는 한 줄이 덧붙는다.
-
-“달 뒷면(FARSIDE)은 점령 불가 구역.”
-
-남극-에이킨 분지(South Pole–Aitken Basin)의 깊은 그늘,
-티올콥스키(Tsiolkovskiy) 분화구 주변의 산악 지형,
-마레 모스코비엔세(Mare Moscoviense) 일대의 통신 음영과 잔존 병력의 저항.
-앞면에서 통하던 전술은 뒷면에서 무너졌다.
-
-전쟁은 끝난 것이 아니다.
-다만 ‘달 앞면’이라는 무대가 막을 내렸을 뿐.
-
-— 다음 작전은, 뒷면의 어둠 속에서 시작된다.</div>
-
-        <div class="meta">
-          <div class="tag"><b>확보</b>: Oceanus Procellarum · Mare Imbrium · Mare Tranquillitatis · Mare Serenitatis</div>
-          <div class="tag"><b>결전</b>: Copernicus · Plato · Tycho · Aristarchus</div>
-          <div class="tag"><b>점령 불가</b>: South Pole–Aitken · Tsiolkovskiy · Mare Moscoviense</div>
-        </div>
-<img href="img (2).png">
-        <div class="actions">
-          <button class="btn secondary" onclick="location.href='ss.html'">메인으로 돌아가기</button>
-          <button class="btn" onclick="location.href='ss.html#continue'">다시 플레이</button>
-        </div>
+      <div class="image-wrap">
+        <img src="img (2).png" alt="Moon Epilogue">
       </div>
-      <footer>
-        Tip: 다음 시즌을 만들 때는 ‘달 뒷면’ 맵에서 통신 지연/음영(레이더 사각)·지형 고저 차·보급 제한 같은 기믹을 추가하면 분위기가 확 살아납니다.
-      </footer>
     </div>
+
+    <div class="footer">
+      <button onclick="goNext()">에필로그 종료</button>
+    </div>
+
   </div>
+</div>
+
+<script>
+/* starfield */
+(()=>{
+  const c=document.getElementById('stars'),ctx=c.getContext('2d');
+  let W,H,DPR,stars=[];
+  function resize(){
+    DPR=Math.max(1,devicePixelRatio||1);
+    W=innerWidth;H=innerHeight;
+    c.width=W*DPR;c.height=H*DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    stars=Array.from({length:Math.min(500,W*H/4000)},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*1.5+.3,
+      v:Math.random()*.3+.05,
+      a:Math.random()*.7+.2
+    }));
+  }
+  addEventListener('resize',resize);resize();
+  (function tick(){
+    ctx.clearRect(0,0,W,H);
+    for(const s of stars){
+      s.y+=s.v;if(s.y>H){s.y=0;s.x=Math.random()*W}
+      ctx.globalAlpha=s.a;
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle="#fff";ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* typewriter */
+const text =
+  "마지막 나치가 앞에 있다.\n" +
+  "이 버러지 같은 놈이 오른팔을 올리며 이상한 말을 짓걸였지만,\n" +
+  "들리지도 않고 상관 또한 없다.\n" +
+"달 뒷면은 해방되지 못했지만,\n" +
+"앞면은 이제 자유와 민주주의의 땅이다.";
+
+const el=document.getElementById('tw');
+let i=0;
+(function type(){
+  el.innerHTML=text.slice(0,i).replace(/\n/g,"<br>");
+  if(i++<text.length)setTimeout(type,30);
+})();
+
+function goNext(){
+  document.getElementById('fade').classList.add('on');
+  setTimeout(()=>location.href="index.html",700);
+}
+</script>
 </body>
 </html>
